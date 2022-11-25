@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    
+    <section>
+        <h1>To-Do List</h1>
+        <div id="form-div">
+            <form id="todo-form" action="/create-data" method="post">
+                <div id="description-div" class="padding-left">
+                    <h3>DESCRIPTION</h3>
+                    <input class="input-size" name="description" type="text" placeholder="What do you want to do?" required>
+                </div>
+                <div id="other-options">
+                    <div class="padding-left">
+                        <h3>CATEGORY</h3>
+                        <select id="input-category" class="input-size" name="category" id="" required>
+                            <option value=""></option>
+                            <option value="Home">Home</option>
+                            <option value="School">School</option>
+                            <option value="Office">Office</option>
+                            <option value="Outdoor">Outdoor</option>
+                        </select>
+                    </div>
+                    <div class="padding-left left-border">
+                        <h3>DATE</h3>
+                        <input class="input-size"  type="date" name="date" required>
+                    </div>
+                </div>
+                <div id="buttons">
+                    <button class="btn grey" type="submit">
+                        <i class="fas fa-plus"></i>
+                        <span>ADD</span>
+                    </button>
+                    <button class="btn red-color " type="submit" form="container">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>DELETE</span>
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+        <form id="container" action="/delete-data" method="post">
+            <% for(let i of dataindb) {%>
+            <div class="next-container">
+                <input name="_id" type="checkbox" value="<%= i.id%>">
+                <div class="date-des">
+                    <div class="inner-date">
+                        <p><%= i.description %></p>
+                    <p class="p-date">
+                        <i class="fas fa-calendar-day"></i>
+                        <%= i.date %></p>
+                    </div>
+
+                    <div class="cate">
+                        <div class="ccate"><%= i.category%></div>
+                    </div>
+                </div>
+                <div class="cross">
+                    <a href="/delete/?id=<%=i.id%>">
+                        <i class="fas fa-xmark"></i>
+                    </a>
+                </div>
+                
+            </div>
+            <%}%>
+        </form>
+
+    </section>
+
+
+
+
+
+
+
+    
+    <script src="https://kit.fontawesome.com/ad3c4c04de.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/home.js"></script>
+</body>
+</html>
